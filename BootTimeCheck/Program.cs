@@ -14,9 +14,14 @@ namespace BootTimeCheck
         [STAThread]
         static void Main()
         {
+            // Create instance of EventLogInfoReader to read from event logs.
+            EventLogInfoReader eventLog = new EventLogInfoReader();
+
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Main(eventLog));
         }
     }
 }
