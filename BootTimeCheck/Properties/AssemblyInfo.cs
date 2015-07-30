@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BootTimeCheck")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Boot Time Diagnostics")]
+[assembly: AssemblyDescription("Shows diagnostic information about Windows boot times.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BootTimeCheck")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCompany("FireLogic, Inc.")]
+[assembly: AssemblyProduct("Boot Time Diagnostics")]
+[assembly: AssemblyCopyright("Copyright © Austin Peterson; FireLogic, Inc. 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
