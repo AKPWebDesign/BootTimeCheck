@@ -28,9 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.LegendItem legendItem4 = new System.Windows.Forms.DataVisualization.Charting.LegendItem();
+            System.Windows.Forms.DataVisualization.Charting.LegendItem legendItem5 = new System.Windows.Forms.DataVisualization.Charting.LegendItem();
+            System.Windows.Forms.DataVisualization.Charting.LegendItem legendItem6 = new System.Windows.Forms.DataVisualization.Charting.LegendItem();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.avgLabel = new System.Windows.Forms.Label();
             this.avgBox = new System.Windows.Forms.TextBox();
@@ -46,22 +51,35 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legendItem4.Color = System.Drawing.Color.DarkRed;
+            legendItem4.Name = "Poor";
+            legendItem5.Color = System.Drawing.Color.Yellow;
+            legendItem5.Name = "Fair";
+            legendItem6.Color = System.Drawing.Color.LimeGreen;
+            legendItem6.Name = "Good";
+            legend2.CustomItems.Add(legendItem4);
+            legend2.CustomItems.Add(legendItem5);
+            legend2.CustomItems.Add(legendItem6);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(12, 67);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            series1.IsValueShownAsLabel = true;
-            series1.LabelBackColor = System.Drawing.Color.Black;
-            series1.LabelForeColor = System.Drawing.Color.White;
-            series1.Name = "Series";
-            this.chart1.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series2.IsValueShownAsLabel = true;
+            series2.IsVisibleInLegend = false;
+            series2.LabelBackColor = System.Drawing.Color.Black;
+            series2.LabelForeColor = System.Drawing.Color.White;
+            series2.Legend = "Legend1";
+            series2.Name = "Series";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(766, 456);
             this.chart1.TabIndex = 0;
-            title1.Name = "TableTitle";
-            title1.Text = "Historical Boot Times (in seconds)";
-            this.chart1.Titles.Add(title1);
+            title2.Name = "TableTitle";
+            title2.Text = "Historical Boot Times (in seconds)";
+            this.chart1.Titles.Add(title2);
             // 
             // avgLabel
             // 
@@ -163,6 +181,7 @@
             this.Controls.Add(this.avgBox);
             this.Controls.Add(this.avgLabel);
             this.Controls.Add(this.chart1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.Text = "Boot Time Diagnostics";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();

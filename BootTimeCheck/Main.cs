@@ -19,95 +19,123 @@ namespace BootTimeCheck
             Random rnd = new Random();
 
             this.data = eL.ReadEventLogData();
-
-            SetUpChart(data, 2);
-            maxBox.Text = FindMaxValue(data) / 1000 + "s";
-            minBox.Text = FindMinValue(data) / 1000 + "s";
-            avgBox.Text = FindMean(data) / 1000 + "s";
             cbxBoots.SelectedIndex = 0;
-            improvementBox.Text = FindImprovement(data, 2) / 1000 + "s";
         }
 
-        private int FindMaxValue(List<int> list)
+        private void drawData(int eventCount)
+        {
+            List<IEvent> lastX = data.Skip(data.Count - eventCount).ToList();
+
+            SetUpChart(lastX);
+            maxBox.Text = FindMaxValue(lastX) / 1000 + "s";
+            minBox.Text = FindMinValue(lastX) / 1000 + "s";
+            avgBox.Text = FindMean(lastX) / 1000 + "s";
+            improvementBox.Text = FindImprovement(lastX) / 1000 + "s";
+        }
+
+        private int FindMaxValue(List<IEvent> list)
         {
             int max = 0;
 
             foreach (var item in list)
             {
-                if (max < item)
+                if (max < item.BootTime())
                 {
-                    max = item;
+                    max = item.BootTime();
                 }
             }
 
             return max;
         }
 
-        private int FindMinValue(List<int> list)
+        private int FindMinValue(List<IEvent> list)
         {
             int min = Int32.MaxValue;
 
             foreach (var item in list)
             {
-                if (min > item)
+                if (min > item.BootTime())
                 {
-                    min = item;
+                    min = item.BootTime();
                 }
             }
 
             return min;
         }
 
-        private int FindMean(List<int> list)
+        private int FindMean(List<IEvent> list)
         {
             int values = list.Count;
             int sum = 0;
             foreach (var item in list)
             {
-                sum += item;
+                sum += item.BootTime();
             }
             return sum / values;
         }
 
-        private int FindImprovement(List<int> list, int numberOfEvents)
+        private int FindImprovement(List<IEvent> list)
         {
-            if (numberOfEvents > list.Count)
-            {
-                numberOfEvents = list.Count;
-            }
-            List<int> query = list.Distinct().ToList();
-            List<int> lastX = query.Skip(query.Count - numberOfEvents).ToList();
-
-            return lastX.ToArray()[0] - lastX.ToArray()[numberOfEvents - 1];
+            return list.ToArray()[0].BootTime() - list.ToArray()[list.Count() - 1].BootTime();
         }
 
-        private void SetUpChart(List<int> list, int numberOfEvents)
+        private void SetUpChart(List<IEvent> list)
         {
-            if (numberOfEvents > list.Count)
-            {
-                numberOfEvents = list.Count;
-            }
-
             chart1.Series["Series"].Points.Clear();
 
-            List<int> query = list.Distinct().ToList();
-            List<int> lastX = query.Skip(query.Count - numberOfEvents).ToList();
-
-            if (numberOfEvents > lastX.Count)
-            {
-                numberOfEvents = lastX.Count;
-            }
-
             //gather data points from EventLogInfoReader
-            for (int events = 0; events < numberOfEvents; events++)
+            for (int events = 0; events < list.Count(); events++)
             {
-                chart1.Series["Series"].Points.AddY(lastX.ToArray()[events] / 1000);
-                chart1.Series["Series"].Points[events].AxisLabel = "Boot "+(events+1);
-                if (((numberOfEvents - 1) % 5) != (events % 5) && events != 0 && events != numberOfEvents - 1)
+                int bootTime = list.ToArray()[events].BootTime() / 1000;
+                int mainPath = list.ToArray()[events].MainPath() / 1000;
+                int postBoot = list.ToArray()[events].PostBoot() / 1000;
+                Color color = Color.LimeGreen;
+
+                switch (list.ToArray()[events].Priority())
                 {
-                    chart1.Series["Series"].Points[events].LabelBackColor = Color.Transparent;
-                    chart1.Series["Series"].Points[events].LabelForeColor = Color.Transparent;
+                    case 1:
+                        color = Color.DarkRed;
+                        break;
+                    case 2:
+                        color = Color.Yellow;
+                        break;
+                    case 3:
+                    default:
+                        color = Color.LimeGreen;
+                        break;
                 }
+
+                createPoint(events, bootTime, color, list);
+
+                //if (postBoot > mainPath)
+                //{
+                //    createPoint(events, postBoot, Color.Teal, list);
+                //    createPoint(events, mainPath, Color.LightSeaGreen, list);
+                //}
+                //else
+                //{
+                //    createPoint(events, mainPath, Color.LightSeaGreen, list);
+                //    createPoint(events, postBoot, Color.Teal, list);
+                //}
+
+                chart1.Series["Series"].Points[events].AxisLabel = list.ToArray()[events].DateTime().Date.ToShortDateString();
+            }
+        }
+
+        private int createPoint(int events, int value, Color color, List<IEvent> list)
+        {
+            int point = chart1.Series["Series"].Points.AddXY(events, value);
+            chart1.Series["Series"].Points[point].Color = color;
+            chartLabelCheck(list, events, point);
+            return point;
+        }
+
+        private void chartLabelCheck(List<IEvent> list, int events, int point)
+        {
+            if (((list.Count() - 1) % 5) != (events % 5) && events != 0 && events != list.Count() - 1)
+            {
+                chart1.Series["Series"].Points[point].LabelBackColor = Color.Transparent;
+                chart1.Series["Series"].Points[point].LabelForeColor = Color.Transparent;
             }
         }
 
@@ -121,10 +149,15 @@ namespace BootTimeCheck
             math[4] = 21;
             math[5] = Int32.MaxValue;
 
-            improvementBox.Text = FindImprovement(data, math[cbxBoots.SelectedIndex]) / 1000 + "s";
-            SetUpChart(data, math[cbxBoots.SelectedIndex]);
+            int count = math[cbxBoots.SelectedIndex];
+
+            if (count > data.Count)
+            {
+                count = data.Count;
+            }
+            drawData(count);
         }
 
-        public List<int> data { get; set; }
+        public List<IEvent> data { get; set; }
     }
 }
