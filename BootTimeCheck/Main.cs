@@ -103,7 +103,7 @@ namespace BootTimeCheck
             {
                 chart1.Series["Series"].Points.AddY(lastX.ToArray()[events] / 1000);
                 chart1.Series["Series"].Points[events].AxisLabel = "Boot "+(events+1);
-                if ((events % 5) != 0 && events != 0 && events != numberOfEvents-1)
+                if (((numberOfEvents - 1) % 5) != (events % 5) && events != 0 && events != numberOfEvents - 1)
                 {
                     chart1.Series["Series"].Points[events].LabelBackColor = Color.Transparent;
                     chart1.Series["Series"].Points[events].LabelForeColor = Color.Transparent;

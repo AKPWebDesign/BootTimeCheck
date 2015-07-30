@@ -7,3 +7,12 @@ C:\Users\apeterson\Desktop\Code\BootTimeCheck\BootTimeCheck\bin\Debug\BootTimeCh
 C:\Users\apeterson\Desktop\Code\BootTimeCheck\BootTimeCheck\bin\Debug\BootTimeCheck.pdb
 C:\Users\apeterson\Desktop\Code\BootTimeCheck\BootTimeCheck\obj\Debug\BootTimeCheck.exe
 C:\Users\apeterson\Desktop\Code\BootTimeCheck\BootTimeCheck\obj\Debug\BootTimeCheck.pdb
+C:\Users\AKP\Desktop\Code\BootTimeCheck\BootTimeCheck\bin\Debug\BootTimeCheck.exe.config
+C:\Users\AKP\Desktop\Code\BootTimeCheck\BootTimeCheck\bin\Debug\BootTimeCheck.exe
+C:\Users\AKP\Desktop\Code\BootTimeCheck\BootTimeCheck\bin\Debug\BootTimeCheck.pdb
+C:\Users\AKP\Desktop\Code\BootTimeCheck\BootTimeCheck\obj\Debug\BootTimeCheck.csprojResolveAssemblyReference.cache
+C:\Users\AKP\Desktop\Code\BootTimeCheck\BootTimeCheck\obj\Debug\BootTimeCheck.Main.resources
+C:\Users\AKP\Desktop\Code\BootTimeCheck\BootTimeCheck\obj\Debug\BootTimeCheck.Properties.Resources.resources
+C:\Users\AKP\Desktop\Code\BootTimeCheck\BootTimeCheck\obj\Debug\BootTimeCheck.csproj.GenerateResource.Cache
+C:\Users\AKP\Desktop\Code\BootTimeCheck\BootTimeCheck\obj\Debug\BootTimeCheck.exe
+C:\Users\AKP\Desktop\Code\BootTimeCheck\BootTimeCheck\obj\Debug\BootTimeCheck.pdb
