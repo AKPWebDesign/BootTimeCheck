@@ -214,3 +214,6 @@ FakesAssemblies/
 **/*.Server/GeneratedArtifacts
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
+
+# FireLogic logo (get your own)
+logo.png
