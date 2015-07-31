@@ -162,13 +162,16 @@ namespace BootTimeCheck
 
         private void showData()
         {
-            int[] math = new int[6];
+            int[] math = new int[9];
             math[0] = 2;
             math[1] = 6;
             math[2] = 11;
             math[3] = 16;
             math[4] = 21;
-            math[5] = Int32.MaxValue;
+            math[5] = 26;
+            math[6] = 51;
+            math[7] = 101;
+            math[8] = Int32.MaxValue;
 
             barProgress.Value = 30;
 
