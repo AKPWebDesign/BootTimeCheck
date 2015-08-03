@@ -61,6 +61,8 @@
             // 
             // chart1
             // 
+            chartArea1.CursorX.IsUserEnabled = true;
+            chartArea1.CursorX.IsUserSelectionEnabled = true;
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
             legendItem1.Color = System.Drawing.Color.DarkRed;
@@ -84,6 +86,7 @@
             series1.LabelForeColor = System.Drawing.Color.White;
             series1.Legend = "Legend1";
             series1.Name = "Series";
+            series1.SmartLabelStyle.Enabled = false;
             this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(766, 437);
             this.chart1.TabIndex = 0;

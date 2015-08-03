@@ -90,9 +90,10 @@ namespace BootTimeCheck
         private void SetUpChart(List<IEvent> list)
         {
             chart1.Series["Series"].Points.Clear();
+            int events = 0;
 
             //gather data points from EventLogInfoReader
-            for (int events = 0; events < list.Count(); events++)
+            for (; events < list.Count(); events++)
             {
                 barProgress.Value = 0;
                 int bootTime = list.ToArray()[events].BootTime() / 1000;
@@ -129,8 +130,11 @@ namespace BootTimeCheck
                 //}
 
                 chart1.Series["Series"].Points[events].AxisLabel = list.ToArray()[events].DateTime().Date.ToShortDateString();
+                chart1.Series["Series"].Points[events].ToolTip = "" + (list.ToArray()[events].BootTime() / 1000);
                 barProgress.Value = 100;
             }
+
+            chart1.ChartAreas[0].AxisX.ScaleView.ZoomReset();
         }
 
         private int createPoint(int events, int value, Color color, List<IEvent> list)
@@ -143,7 +147,9 @@ namespace BootTimeCheck
 
         private void chartLabelCheck(List<IEvent> list, int events, int point)
         {
-            if (((list.Count() - 1) % 5) != (events % 5) && events != 0 && events != list.Count() - 1)
+            double skip = list.Count() / 10;
+
+            if (((list.Count() - 1) % skip) != (events % skip) && events != 0 && events != list.Count() - 1)
             {
                 chart1.Series["Series"].Points[point].LabelBackColor = Color.Transparent;
                 chart1.Series["Series"].Points[point].LabelForeColor = Color.Transparent;
